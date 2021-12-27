@@ -56,4 +56,5 @@ jobs:
           heroku_email: "webmaster@cherylli.com"
           healthcheck: "https://fso-pokedex-cm.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
       
