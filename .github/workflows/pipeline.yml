@@ -54,4 +54,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fso-pokedex-cm" #Must be unique in Heroku
           heroku_email: "webmaster@cherylli.com"
+          healthcheck: "https://fso-pokedex-cm.herokuapp.com/health"
+          checkstring: "ok"
       
