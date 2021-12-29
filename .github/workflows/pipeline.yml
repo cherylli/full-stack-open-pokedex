@@ -60,3 +60,8 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
       
+      # versioning
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
