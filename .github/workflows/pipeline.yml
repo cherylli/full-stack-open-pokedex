@@ -51,7 +51,7 @@ jobs:
       # deploy to heroku
       - name: deploy to heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        if:  ${{ github.event_name == 'push' }}
+        if:  ${{ github.event_name == 'push' && !contains(github.event.commits[0].message, '#skip')}}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fso-pokedex-cm" #Must be unique in Heroku
@@ -62,7 +62,14 @@ jobs:
       
       # versioning
       - uses: actions/checkout@v2
+
       - name: Bump version and push tag
+        if: "github.event_name == 'push' && !contains(github.event.commits[0].message, '#skip')"
         uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    #Note: New in Feb 2021
+    # If any commit message in your push or the HEAD commit of your PR contains the strings 
+    # [skip ci], [ci skip], [no ci], [skip actions], or [actions skip] workflows triggered
+    # on the push or pull_request events will be skipped.
